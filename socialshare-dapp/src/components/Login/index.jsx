@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Card, Content } from "react-bulma-components";
 import Loader from "components/Loader";
+import './index.css'
 
 export default class Login extends Component {
     state = {
@@ -17,7 +18,7 @@ export default class Login extends Component {
         const { loading } = this.state;
 
         return (
-            <Card>
+            <Card className="card">
                 <Card.Content>
                     <Content>
                         {loading ? (

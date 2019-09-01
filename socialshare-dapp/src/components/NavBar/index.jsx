@@ -67,7 +67,7 @@ class NavbarComp extends Component {
                         {isSignedIn && (
                             <React.Fragment>
                                 <Navbar.Item onClick={this.goToAdminPosts}>
-                                    Posts
+                                   My Posts
                                 </Navbar.Item>
                                 <Navbar.Item onClick={this.goToAdminProfile}>
                                     My Profile

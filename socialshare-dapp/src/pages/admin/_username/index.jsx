@@ -8,6 +8,7 @@ import {
     Columns
 } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
+import './index.css'
 
 class AdminUsername extends Component {
     state = {
@@ -44,7 +45,7 @@ class AdminUsername extends Component {
 
         return (
             <div className="admin-username">
-                <Card>
+                <Card className="cardFront">
                     <Card.Content>
                         <Content>
                             <Heading renderAs="h2">Hello {username}</Heading>
@@ -55,7 +56,7 @@ class AdminUsername extends Component {
                                 Create Post
                             </Button>
                             <div className="mt-one">
-                                <Columns>
+                                <Columns className="colClass">
                                     <Columns.Column size={6}>
                                         <div className="field">
                                             <label className="label">
@@ -64,7 +65,7 @@ class AdminUsername extends Component {
                                             <input
                                                 type="text"
                                                 className="input"
-                                                placeholder="Type here"
+                                                placeholder="Enter a user's name"
                                                 onChange={this.onChange}
                                                 onKeyPress={this.onKeyPress}
                                             />

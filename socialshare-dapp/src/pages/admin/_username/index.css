@@ -1,0 +1,9 @@
+.cardFront {
+    margin-top: 0;
+}
+
+.colClass {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}

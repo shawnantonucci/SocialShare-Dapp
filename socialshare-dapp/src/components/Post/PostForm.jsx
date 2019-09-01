@@ -6,6 +6,7 @@ import { Button, Form, Image } from "semantic-ui-react";
 import { POST_FILENAME } from "utils/constants";
 import generateUUID from "utils/generateUUID";
 import ImageUpload from "../ImageUploader";
+import FileBase64 from "react-file-base64";
 
 class PostForm extends Component {
     constructor(props) {
@@ -19,7 +20,8 @@ class PostForm extends Component {
             posts: [],
             image: post.image || [],
             upload: false,
-            file: null
+            file: null,
+            files: []
         };
     }
 
@@ -146,14 +148,10 @@ class PostForm extends Component {
         });
     };
 
-    onImageUpload = image => {
-        console.log(image, "IMAGE");
-
-        this.setState({
-            file: URL.createObjectURL(image[0]),
-            upload: true
-        });
-    };
+    getFiles = (files) => {
+        console.log(files)
+        this.setState({ file: files });
+    }
 
     onSubmit = e => {
         e.preventDefault();
@@ -164,9 +162,6 @@ class PostForm extends Component {
     };
 
     render() {
-        console.log(this.state.image, "From image");
-        console.log(this.state.file, "From file");
-        console.log(this.state.posts);
 
         return (
             <div>
@@ -192,7 +187,10 @@ class PostForm extends Component {
                             />
                         )}
                         {!this.state.upload && (
-                            <ImageUpload onImageUpload={this.onImageUpload} />
+                            <FileBase64
+                                multiple={true}
+                                onDone={this.getFiles}
+                            />
                         )}
                     </Form.Field>
                     <Form.Field>

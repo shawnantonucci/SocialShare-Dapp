@@ -34,7 +34,13 @@ class PostDetailView extends Component {
 
     render() {
         const { post } = this.state;
-        console.log(post, "from post")
+        console.log(post, "from post");
+        let tempFile = "";
+
+        if (post.file) {
+            tempFile = post.file[0];
+            console.log(tempFile.base64, "TEMPFILE");
+        }
 
         return (
             <Card>
@@ -42,7 +48,7 @@ class PostDetailView extends Component {
                     <Content>
                         <Heading renderAs="h1">{post.title}</Heading>
                         <Heading renderAs="h3">ID - {post.id}</Heading>
-                        <Image src={post.file} />
+                        <Image src={tempFile.base64} />
                         <p>{post.description}</p>
                     </Content>
                 </Card.Content>

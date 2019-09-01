@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Card, Content } from "react-bulma-components";
-import Loader from "../Loader";
+import Loader from "components/Loader";
 
 export default class Login extends Component {
     state = {

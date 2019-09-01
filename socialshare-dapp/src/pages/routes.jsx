@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { Switch, Route, Redirect } from "react-router-dom";
-import UserProvider from "../components/User/UserProvider";
-import Loader from "../components/Loader";
-// import AdminUsernameRoute from "pages/admin/_username/routes";
-// import UsernamePostsRoute from "pages/_username/routes";
+import UserProvider from "components/User/UserProvider";
+import Loader from "components/Loader";
+import AdminUsernameRoute from "pages/admin/_username/routes";
+import UsernamePostsRoute from "pages/_username/routes";
 
 class Routes extends Component {
     state = {
@@ -33,11 +33,10 @@ class Routes extends Component {
                         exact
                         path="/"
                         render={() => (
-                            // <Redirect to={`/admin/${user.username}`} />
-                            <Redirect to={`/admin`} />
+                            <Redirect to={`/admin/${user.username}`} />
                         )}
                     />
-                    {/* <Route
+                    <Route
                         // exact
                         path="/admin/:username"
                         render={({ match }) => (
@@ -49,7 +48,7 @@ class Routes extends Component {
                         render={({ match }) => (
                             <UsernamePostsRoute match={match} />
                         )}
-                    /> */}
+                    />
                 </Switch>
             </UserProvider>
         );

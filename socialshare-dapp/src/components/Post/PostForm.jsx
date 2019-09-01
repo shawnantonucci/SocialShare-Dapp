@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Image } from "semantic-ui-react";
 import { POST_FILENAME } from "utils/constants";
 import generateUUID from "utils/generateUUID";
+import ImageUpload from "../ImageUploader";
 
 class PostForm extends Component {
     constructor(props) {
@@ -15,7 +16,10 @@ class PostForm extends Component {
         this.state = {
             title: post.title || "", // returns an edited post or starting a new post
             description: post.description || "", // returns an edited post or starting a new post
-            posts: []
+            posts: [],
+            image: post.image || [],
+            upload: false,
+            file: null
         };
     }
 
@@ -93,14 +97,15 @@ class PostForm extends Component {
 
     createPost = async () => {
         const options = { encrypt: false };
-        const { title, description, posts } = this.state;
+        const { title, description, posts, file } = this.state;
         const { history, userSession, username } = this.props;
         const id = generateUUID();
 
         // for posts.json
         const params = {
             id,
-            title
+            title,
+            file
         };
 
         // for post-${post-id}.json
@@ -124,7 +129,9 @@ class PostForm extends Component {
             this.setState(
                 {
                     title: "",
-                    description: ""
+                    description: "",
+                    file: null,
+                    image: []
                 },
                 () => history.push(`/admin/${username}/posts`)
             );
@@ -139,6 +146,15 @@ class PostForm extends Component {
         });
     };
 
+    onImageUpload = image => {
+        console.log(image, "IMAGE");
+
+        this.setState({
+            file: URL.createObjectURL(image[0]),
+            upload: true
+        });
+    };
+
     onSubmit = e => {
         e.preventDefault();
 
@@ -148,7 +164,10 @@ class PostForm extends Component {
     };
 
     render() {
+        console.log(this.state.image, "From image");
+        console.log(this.state.file, "From file");
         console.log(this.state.posts);
+
         return (
             <div>
                 <Form onSubmit={this.onSubmit}>
@@ -157,10 +176,24 @@ class PostForm extends Component {
                         <input
                             name="title"
                             onChange={this.onChange}
-                            s
                             placeholder="Title of the Post"
                             value={this.state.title}
                         />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Location Image</label>
+                        {this.state.upload && (
+                            <Image
+                                src={this.state.file}
+                                style={{
+                                    maxHeight: "400px",
+                                    maxWidth: "400px"
+                                }}
+                            />
+                        )}
+                        {!this.state.upload && (
+                            <ImageUpload onImageUpload={this.onImageUpload} />
+                        )}
                     </Form.Field>
                     <Form.Field>
                         <label>Description</label>

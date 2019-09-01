@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Card, Heading, Content } from "react-bulma-components";
+import { Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 
 class PostDetailView extends Component {
@@ -33,6 +34,7 @@ class PostDetailView extends Component {
 
     render() {
         const { post } = this.state;
+        console.log(post, "from post")
 
         return (
             <Card>
@@ -40,6 +42,7 @@ class PostDetailView extends Component {
                     <Content>
                         <Heading renderAs="h1">{post.title}</Heading>
                         <Heading renderAs="h3">ID - {post.id}</Heading>
+                        <Image src={post.file} />
                         <p>{post.description}</p>
                     </Content>
                 </Card.Content>

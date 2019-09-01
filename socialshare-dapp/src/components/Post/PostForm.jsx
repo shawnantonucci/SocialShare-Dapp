@@ -148,10 +148,9 @@ class PostForm extends Component {
         });
     };
 
-    getFiles = (files) => {
-        console.log(files)
-        this.setState({ file: files });
-    }
+    getFiles = files => {
+        this.setState({ file: files, upload: true });
+    };
 
     onSubmit = e => {
         e.preventDefault();
@@ -162,6 +161,7 @@ class PostForm extends Component {
     };
 
     render() {
+        console.log(this.state, "TEST");
 
         return (
             <div>
@@ -177,12 +177,13 @@ class PostForm extends Component {
                     </Form.Field>
                     <Form.Field>
                         <label>Location Image</label>
-                        {this.state.upload && (
+                        {this.state.file && (
                             <Image
-                                src={this.state.file}
+                                src={this.state.file[0].base64}
                                 style={{
-                                    maxHeight: "400px",
-                                    maxWidth: "400px"
+                                    width: "300px",
+                                    height: "auto",
+                                    margin: "auto"
                                 }}
                             />
                         )}

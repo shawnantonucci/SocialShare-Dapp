@@ -48,7 +48,14 @@ class PostDetailView extends Component {
                     <Content>
                         <Heading renderAs="h1">{post.title}</Heading>
                         <Heading renderAs="h3">ID - {post.id}</Heading>
-                        <Image src={tempFile.base64} />
+                        <Image
+                            src={tempFile.base64}
+                            style={{
+                                width: "300px",
+                                height: "auto",
+                                margin: "auto"
+                            }}
+                        />
                         <p>{post.description}</p>
                     </Content>
                 </Card.Content>

@@ -10,11 +10,14 @@ const mapStyles = {
     }
 };
 export class MapContainer extends Component {
-    state = {
-        showingInfoWindow: false, //Hides or the shows the infoWindow
-        activeMarker: {}, //Shows the active marker upon click
-        selectedPlace: {} //Shows the infoWindow to the selected place upon a marker
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showingInfoWindow: false, //Hides or the shows the infoWindow
+            activeMarker: {}, //Shows the active marker upon click
+            selectedPlace: {} //Shows the infoWindow to the selected place upon a marker
+        };
+    }
 
     onMarkerClick = (props, marker, e) =>
         this.setState({
@@ -35,6 +38,7 @@ export class MapContainer extends Component {
     render() {
         return (
             <CurrentLocation
+                setLocation={this.props.setLocation}
                 centerAroundCurrentLocation
                 google={this.props.google}
             >

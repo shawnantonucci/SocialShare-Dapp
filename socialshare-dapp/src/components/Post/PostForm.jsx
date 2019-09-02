@@ -40,6 +40,10 @@ class PostForm extends Component {
         this.loadPosts();
     }
 
+    setLocation = location => {
+        this.setState({ location: location });
+    };
+
     loadPosts = async () => {
         const { userSession } = this.props;
         const options = { decrypt: false };
@@ -56,14 +60,15 @@ class PostForm extends Component {
     editPost = async () => {
         this.setState({ loading: true });
         const options = { encrypt: false };
-        const { title, description, posts, file } = this.state;
+        const { title, description, posts, file, location } = this.state;
         const { history, userSession, username, post } = this.props;
 
         // for post.json
         const params = {
             id: post.id,
             title,
-            file
+            file,
+            location
         };
 
         // for post-${pst-id}.json
@@ -95,7 +100,8 @@ class PostForm extends Component {
                 {
                     title: "",
                     description: "",
-                    file: null
+                    file: null,
+                    location: {}
                 },
                 () => history.push(`/admin/${username}/posts`)
             );
@@ -107,7 +113,7 @@ class PostForm extends Component {
     createPost = async () => {
         this.setState({ loading: true });
         const options = { encrypt: false };
-        const { title, description, posts, file } = this.state;
+        const { title, description, posts, file, location } = this.state;
         const { history, userSession, username } = this.props;
         const id = generateUUID();
 
@@ -115,7 +121,8 @@ class PostForm extends Component {
         const params = {
             id,
             title,
-            file
+            file,
+            location
         };
 
         // for post-${post-id}.json
@@ -142,7 +149,8 @@ class PostForm extends Component {
                     description: "",
                     file: null,
                     image: [],
-                    loading: false
+                    loading: false,
+                    location: {}
                 },
                 () => history.push(`/admin/${username}/posts`)
             );
@@ -193,6 +201,9 @@ class PostForm extends Component {
             }
             console.log("EDIT");
         }
+
+        console.log(this.state.location, "FROM form");
+
         return (
             <div style={{ width: "70%", marginTop: "30px" }}>
                 {this.state.loading ? (
@@ -216,7 +227,15 @@ class PostForm extends Component {
                             }}
                         >
                             <label>Google Maps Location</label>
-                            <Map />
+                            <Map setLocation={this.setLocation} />
+                        </Form.Field>
+                        <Form.Field>
+                            <h4
+                                style={{
+                                    paddingTop: "10px",
+                                    marginBottom: "25px"
+                                }}
+                            >{`${this.state.location}`}</h4>
                         </Form.Field>
                         <Form.Field>
                             <label>Upload an image of the location</label>
@@ -234,7 +253,7 @@ class PostForm extends Component {
                                 <FileBase64
                                     multiple={true}
                                     onDone={this.getFiles}
-                                    style={{width: "50%"}}
+                                    style={{ width: "50%" }}
                                 />
                             </div>
                         </Form.Field>

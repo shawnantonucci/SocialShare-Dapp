@@ -27,7 +27,8 @@ export class CurrentLocation extends React.Component {
             currentLocation: {
                 lat: lat,
                 lng: lng
-            }
+            },
+            location: props.location
         };
     }
 
@@ -76,6 +77,8 @@ export class CurrentLocation extends React.Component {
             response => {
                 const address = response.results[0].formatted_address;
                 console.log(address);
+                // this.setState({ location: address });
+                this.props.setLocation(address)
             },
             error => {
                 console.error(error);
@@ -140,6 +143,7 @@ export class CurrentLocation extends React.Component {
     }
 
     render() {
+        // console.log(this.state.location, "From State")
         const style = Object.assign({}, mapStyles.map);
         return (
             <div>

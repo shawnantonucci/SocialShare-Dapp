@@ -4,7 +4,7 @@ import { Card, Heading, Content } from "react-bulma-components";
 import { Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Loader from "../Loader";
-import './index.scss'
+import "./index.scss";
 class PostDetailView extends Component {
     state = {
         post: {},
@@ -61,11 +61,14 @@ class PostDetailView extends Component {
                                     margin: "auto"
                                 }}
                             />
-                            <Heading renderAs="h3">
-                                Information about {post.title}
-                            </Heading>
-                            <p>{post.description}</p>
-                            <Content></Content>
+                            <Content>
+                                <h3>Address</h3>
+                                <h4 style={{ marginTop: 0 }}>
+                                    {post.location}
+                                </h4>
+                                <h3>Information about {post.title}</h3>
+                                <p style={{overflowWrap: "break-word"}}>{post.description}</p>
+                            </Content>
                         </Card.Content>
                     </Card>
                 )}

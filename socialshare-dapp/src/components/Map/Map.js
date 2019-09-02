@@ -78,7 +78,9 @@ export class CurrentLocation extends React.Component {
                 const address = response.results[0].formatted_address;
                 console.log(address);
                 // this.setState({ location: address });
-                this.props.setLocation(address)
+                if (this.props.setLocation != null) {
+                    this.props.setLocation(address);
+                }
             },
             error => {
                 console.error(error);

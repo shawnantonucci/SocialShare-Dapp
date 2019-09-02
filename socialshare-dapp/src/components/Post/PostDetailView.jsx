@@ -5,10 +5,12 @@ import { Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Loader from "../Loader";
 import "./index.scss";
+import Map from "../Map";
 class PostDetailView extends Component {
     state = {
         post: {},
-        loading: false
+        loading: false,
+        address: ""
     };
 
     static propTypes = {
@@ -67,7 +69,9 @@ class PostDetailView extends Component {
                                     {post.location}
                                 </h4>
                                 <h3>Information about {post.title}</h3>
-                                <p style={{overflowWrap: "break-word"}}>{post.description}</p>
+                                <p style={{ overflowWrap: "break-word" }}>
+                                    {post.description}
+                                </p>
                             </Content>
                         </Card.Content>
                     </Card>

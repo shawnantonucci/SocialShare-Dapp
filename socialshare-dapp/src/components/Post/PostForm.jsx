@@ -21,11 +21,12 @@ class PostForm extends Component {
             posts: [],
             image: post.image || [],
             upload: false,
-            file: null,
+            file: post.file || null,
             files: [],
             location: {},
             buttonReset: true,
-            loading: false
+            loading: false,
+            tempImg: null
         };
     }
 
@@ -68,6 +69,7 @@ class PostForm extends Component {
             id: post.id,
             title,
             file,
+            posts,
             location
         };
 
@@ -202,8 +204,6 @@ class PostForm extends Component {
             console.log("EDIT");
         }
 
-        console.log(this.state.location, "FROM form");
-
         return (
             <div style={{ width: "70%", marginTop: "30px" }}>
                 {this.state.loading ? (
@@ -236,6 +236,13 @@ class PostForm extends Component {
                                     marginBottom: "25px"
                                 }}
                             >{`${this.state.location}`}</h4>
+                        </Form.Field>
+                        <Form.Field>
+                            <input
+                                value={this.state.location}
+                                name="location"
+                                onChange={this.onChange}
+                            />
                         </Form.Field>
                         <Form.Field>
                             <label>Upload an image of the location</label>

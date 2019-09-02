@@ -8,7 +8,7 @@ import {
     Columns
 } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
-import './index.css'
+import "./index.css";
 
 class AdminUsername extends Component {
     state = {
@@ -40,6 +40,7 @@ class AdminUsername extends Component {
 
     render() {
         const { username } = this.props;
+        const modifiedName = username.split(".").shift();
 
         console.log(this.state.searchedWord);
 
@@ -48,24 +49,32 @@ class AdminUsername extends Component {
                 <Card className="cardFront">
                     <Card.Content>
                         <Content>
-                            <Heading renderAs="h2">Hello {username}</Heading>
+                            <Heading renderAs="h2">
+                                Hello {modifiedName}
+                            </Heading>
+                            <Heading renderAs="h6">
+                                (Your Blockstack id)
+                                <br />
+                                {username}
+                            </Heading>
                             <Button
                                 color="primary"
                                 onClick={this.navigateToCreatePost}
                             >
-                                Create Post
+                                Add a location
                             </Button>
                             <div className="mt-one">
                                 <Columns className="colClass">
                                     <Columns.Column size={6}>
                                         <div className="field">
                                             <label className="label">
-                                                Explore user's posts!
+                                                Explore user's posts and
+                                                locations!
                                             </label>
                                             <input
                                                 type="text"
                                                 className="input"
-                                                placeholder="Enter a user's name"
+                                                placeholder="Enter a user's blockstack id"
                                                 onChange={this.onChange}
                                                 onKeyPress={this.onKeyPress}
                                             />

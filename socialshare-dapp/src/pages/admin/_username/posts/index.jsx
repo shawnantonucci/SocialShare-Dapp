@@ -5,13 +5,16 @@ import { withRouter } from "react-router-dom";
 import { POST_FILENAME } from "utils/constants";
 import { MyContext } from "components/User/UserProvider";
 import PostsTable from "components/Post/PostsTable";
+import Loader from "../../../../components/Loader";
 
 class AdminPosts extends Component {
     state = {
-        posts: []
+        posts: [],
+        loading: false
     };
 
     componentDidMount() {
+        this.setState({ loading: true });
         this.loadPosts();
     }
 
@@ -26,13 +29,14 @@ class AdminPosts extends Component {
                 throw new Error("Posts File does not exist");
             }
 
-            return this.setState({ posts: JSON.parse(result) });
+            return this.setState({ posts: JSON.parse(result), loading: false });
         } catch (e) {
             console.log(e.message);
         }
     };
 
-    deletePost = async (postId) => {
+    deletePost = async postId => {
+        this.setState({ loading: true });
         const { userSession } = this.context.state.currentUser;
         const { posts } = this.state;
         const options = { encrypt: false };
@@ -46,7 +50,7 @@ class AdminPosts extends Component {
                 options
             );
             await userSession.deleteFile(`post-${postId}.json`, options);
-            return this.setState({ posts: filteredPosts });
+            return this.setState({ posts: filteredPosts, loading: false });
         } catch (e) {
             console.log(e.message);
         }
@@ -57,17 +61,23 @@ class AdminPosts extends Component {
         const { username } = this.context.state.currentUser;
 
         return (
-            <Card>
-                <Card.Content>
-                    <Content>
-                        <PostsTable
-                            posts={posts}
-                            username={username}
-                            deletePost={this.deletePost}
-                        />
-                    </Content>
-                </Card.Content>
-            </Card>
+            <div>
+                {this.state.loading ? (
+                    <Loader />
+                ) : (
+                    <Card>
+                        <Card.Content>
+                            <Content>
+                                <PostsTable
+                                    posts={posts}
+                                    username={username}
+                                    deletePost={this.deletePost}
+                                />
+                            </Content>
+                        </Card.Content>
+                    </Card>
+                )}
+            </div>
         );
     }
 }

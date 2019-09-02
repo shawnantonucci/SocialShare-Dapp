@@ -54,14 +54,16 @@ class PostForm extends Component {
     };
 
     editPost = async () => {
+        this.setState({ loading: true });
         const options = { encrypt: false };
-        const { title, description, posts } = this.state;
+        const { title, description, posts, file } = this.state;
         const { history, userSession, username, post } = this.props;
 
         // for post.json
         const params = {
             id: post.id,
-            title
+            title,
+            file
         };
 
         // for post-${pst-id}.json
@@ -92,7 +94,8 @@ class PostForm extends Component {
             this.setState(
                 {
                     title: "",
-                    description: ""
+                    description: "",
+                    file: null
                 },
                 () => history.push(`/admin/${username}/posts`)
             );
@@ -138,7 +141,8 @@ class PostForm extends Component {
                     title: "",
                     description: "",
                     file: null,
-                    image: []
+                    image: [],
+                    loading: false
                 },
                 () => history.push(`/admin/${username}/posts`)
             );
@@ -179,6 +183,15 @@ class PostForm extends Component {
                 this.validationButton();
             }
             console.log("works");
+        } else if (
+            this.props.type == "edit" &&
+            this.state.description &&
+            this.state.title != null
+        ) {
+            if (this.state.buttonReset === true) {
+                this.validationButton();
+            }
+            console.log("EDIT");
         }
         return (
             <div style={{ width: "75%" }}>
@@ -217,12 +230,10 @@ class PostForm extends Component {
                                     }}
                                 />
                             )}
-                            {!this.state.upload && (
-                                <FileBase64
-                                    multiple={true}
-                                    onDone={this.getFiles}
-                                />
-                            )}
+                            <FileBase64
+                                multiple={true}
+                                onDone={this.getFiles}
+                            />
                         </Form.Field>
                         <Form.Field>
                             <label>Description</label>

@@ -6,6 +6,10 @@ import { Table, Button } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
 
 class PostsTable extends Component {
+    state = {
+        loading: false
+    };
+
     static propTypes = {
         username: PropTypes.string.isRequired,
         posts: PropTypes.array.isRequired,
@@ -97,7 +101,7 @@ class PostsTable extends Component {
                                         src={post.file[0].base64}
                                     />
                                 </td>
-                                <td>
+                                <td style={{ whiteSpace: "nowrap" }}>
                                     {this.props.type === "admin"
                                         ? this.displayAdminOptions(post)
                                         : this.displayPublicOptions(post)}

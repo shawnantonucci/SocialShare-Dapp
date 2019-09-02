@@ -26,6 +26,7 @@ class Routes extends Component {
         if (_.isEmpty(user)) {
             return <Loader />;
         }
+
         return (
             <UserProvider userSession={userSession}>
                 <Switch>

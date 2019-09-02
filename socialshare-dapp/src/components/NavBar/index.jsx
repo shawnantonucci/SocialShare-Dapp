@@ -55,7 +55,7 @@ class NavbarComp extends Component {
         return (
             <Navbar color="info" fixed="top" active={open}>
                 <Navbar.Brand>
-                    <Navbar.Item>
+                    <Navbar.Item onClick={this.goToAdminProfile}>
                         <p>Social Share</p>
                     </Navbar.Item>
 
@@ -67,7 +67,7 @@ class NavbarComp extends Component {
                         {isSignedIn && (
                             <React.Fragment>
                                 <Navbar.Item onClick={this.goToAdminPosts}>
-                                    Locations
+                                    My Locations
                                 </Navbar.Item>
                                 <Navbar.Item onClick={this.goToAdminProfile}>
                                     Add Location

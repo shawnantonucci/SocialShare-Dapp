@@ -4,7 +4,7 @@ import { Card, Heading, Content } from "react-bulma-components";
 import { Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Loader from "../Loader";
-
+import './index.scss'
 class PostDetailView extends Component {
     state = {
         post: {},
@@ -48,7 +48,7 @@ class PostDetailView extends Component {
                 {this.state.loading ? (
                     <Loader />
                 ) : (
-                    <Card>
+                    <Card className="card">
                         <Card.Content>
                             <Content>
                                 <Heading renderAs="h3">{post.title}</Heading>

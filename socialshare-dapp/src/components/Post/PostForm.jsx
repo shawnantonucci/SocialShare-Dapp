@@ -194,7 +194,7 @@ class PostForm extends Component {
             console.log("EDIT");
         }
         return (
-            <div style={{ width: "75%" }}>
+            <div style={{ width: "70%", marginTop: "30px" }}>
                 {this.state.loading ? (
                     <Loader />
                 ) : (
@@ -230,10 +230,13 @@ class PostForm extends Component {
                                     }}
                                 />
                             )}
-                            <FileBase64
-                                multiple={true}
-                                onDone={this.getFiles}
-                            />
+                            <div className="inputFile">
+                                <FileBase64
+                                    multiple={true}
+                                    onDone={this.getFiles}
+                                    style={{width: "50%"}}
+                                />
+                            </div>
                         </Form.Field>
                         <Form.Field>
                             <label>Description</label>
@@ -246,7 +249,11 @@ class PostForm extends Component {
                                 value={this.state.description}
                             />
                         </Form.Field>
-                        <Button disabled={this.state.buttonReset} type="submit">
+                        <Button
+                            style={{ marginBottom: "10%" }}
+                            disabled={this.state.buttonReset}
+                            type="submit"
+                        >
                             Submit
                         </Button>
                     </Form>

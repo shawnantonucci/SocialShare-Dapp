@@ -43,39 +43,43 @@ class PostDetailView extends Component {
             tempFile = post.file[0];
         }
 
-        console.log(this.state.post, "POST");
-
         return (
             <div style={{ marginTop: "30px", marginBottom: "30%" }}>
                 {this.state.loading ? (
                     <Loader />
                 ) : (
-                    <Form className="cardView">
+                    <Form className="cardView" style={{ height: "auto" }}>
                         <Form.Field>
-                            <h3>{post.title}</h3>
+                            <h1>{post.title}</h1>
                         </Form.Field>
                         <Form.Field>
                             <Image
                                 src={tempFile.base64}
                                 style={{
-                                    width: "300px",
-                                    height: "auto",
+                                    width: "auto",
+                                    height: "400px",
                                     margin: "auto"
                                 }}
                             />
-                            <h3>Address</h3>
-                            <h4 style={{ marginTop: 0 }}>{post.location}</h4>
+                            <h2>Address</h2>
+                            <h3
+                                style={{
+                                    marginTop: 0,
+                                    marginBottom: 20,
+                                    color: "blue"
+                                }}
+                            >
+                                {post.location}
+                            </h3>
                         </Form.Field>
                         <Form.Field>
-                            <h3>Information about {post.title}</h3>
+                            <h2>Information about {post.title}</h2>
                             <p style={{ overflowWrap: "break-word" }}>
                                 {post.description}
                             </p>
                         </Form.Field>
                         <Form.Field>
-                            <ViewMap
-                                post={this.state.post}
-                            />
+                            <ViewMap post={this.state.post} />
                         </Form.Field>
                     </Form>
                 )}

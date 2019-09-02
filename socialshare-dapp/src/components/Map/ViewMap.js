@@ -32,7 +32,6 @@ export class MapContainer extends Component {
         Geocode.fromAddress(address).then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
-                console.log(lat, lng, "CODE");
                 this.setState({ loading: false, location: { lat, lng } });
             },
             error => {
@@ -42,7 +41,6 @@ export class MapContainer extends Component {
     };
 
     render() {
-        console.log(this.state.location, "LOC");
         return (
             <React.Fragment>
                 {this.state.location && this.state.loading ? (

@@ -204,10 +204,7 @@ class PostForm extends Component {
             if (this.state.buttonReset === true) {
                 this.validationButton();
             }
-            console.log("EDIT");
         }
-
-        console.log(this.state.location, "OBJECT")
 
         return (
             <div style={{ width: "70%", marginTop: "30px" }}>

@@ -66,7 +66,6 @@ export class CurrentLocation extends React.Component {
         Geocode.fromAddress(address).then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
-                // console.log(lat, lng, "CODE");
                 this.props.setLocationView(response.results[0]);
             },
             error => {
@@ -80,8 +79,6 @@ export class CurrentLocation extends React.Component {
         Geocode.fromLatLng(lat, lng).then(
             response => {
                 const address = response.results[0].formatted_address;
-                // this.setState({ location: address });
-                // console.log(response.results[0], "SADDASDADFASD")
                 if (this.props.setLocation != null) {
                     this.props.setLocation(response.results[0]);
                 }

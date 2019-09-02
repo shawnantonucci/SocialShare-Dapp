@@ -42,8 +42,6 @@ class AdminUsername extends Component {
         const { username } = this.props;
         const modifiedName = username.split(".").shift();
 
-        console.log(this.state.searchedWord);
-
         return (
             <div className="admin-username">
                 <Card className="cardFront">

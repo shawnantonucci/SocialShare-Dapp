@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
+import { Image } from "semantic-ui-react";
 import { Table, Button } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
 
@@ -80,8 +81,8 @@ class PostsTable extends Component {
             <Table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Title</th>
+                        <th>Location</th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -89,8 +90,13 @@ class PostsTable extends Component {
                     {_.map(posts, post => {
                         return (
                             <tr key={post.id}>
-                                <td>{post.id}</td>
                                 <td>{post.title}</td>
+                                <td>
+                                    <Image
+                                        style={{ height: "40px" }}
+                                        src={post.file[0].base64}
+                                    />
+                                </td>
                                 <td>
                                     {this.props.type === "admin"
                                         ? this.displayAdminOptions(post)

@@ -21,7 +21,9 @@ class PostForm extends Component {
             image: post.image || [],
             upload: false,
             file: null,
-            files: []
+            files: [],
+            location: {},
+            buttonReset: true
         };
     }
 
@@ -160,9 +162,21 @@ class PostForm extends Component {
         return type === "edit" ? this.editPost() : this.createPost();
     };
 
-    render() {
-        console.log(this.state, "TEST");
+    validationButton = () => {
+        this.setState({ buttonReset: !this.state.buttonReset });
+    };
 
+    render() {
+        if (
+            this.state.title &&
+            this.state.description &&
+            this.state.file != null
+        ) {
+            if (this.state.buttonReset === true) {
+                this.validationButton();
+            }
+            console.log("works");
+        }
         return (
             <div style={{ width: "75%" }}>
                 <Form onSubmit={this.onSubmit}>
@@ -171,7 +185,7 @@ class PostForm extends Component {
                         <input
                             name="title"
                             onChange={this.onChange}
-                            placeholder="Title of the Post"
+                            placeholder="Title of the Post "
                             value={this.state.title}
                         />
                     </Form.Field>
@@ -179,14 +193,14 @@ class PostForm extends Component {
                         style={{
                             height: "400px",
                             position: "relative",
-                            marginBottom: "30px",
+                            marginBottom: "30px"
                         }}
                     >
                         <label>Google Maps Location</label>
                         <Map />
                     </Form.Field>
                     <Form.Field>
-                        <label>Location Image</label>
+                        <label>Upload an image of the location</label>
                         {this.state.file && (
                             <Image
                                 src={this.state.file[0].base64}
@@ -215,7 +229,9 @@ class PostForm extends Component {
                             value={this.state.description}
                         />
                     </Form.Field>
-                    <Button type="submit">Submit</Button>
+                    <Button disabled={this.state.buttonReset} type="submit">
+                        Submit
+                    </Button>
                 </Form>
             </div>
         );

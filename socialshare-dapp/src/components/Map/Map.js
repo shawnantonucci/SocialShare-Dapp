@@ -1,5 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Geocode from "react-geocode";
+
+// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
+
+// Enable or disable logs. Its optional.
+Geocode.enableDebug();
+
+// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 
 const mapStyles = {
     map: {
@@ -48,6 +57,32 @@ export class CurrentLocation extends React.Component {
         }
     }
 
+    getLocationCode = () => {
+        // Get latidude & longitude from address.
+        Geocode.fromAddress("Eiffel Tower").then(
+            response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                console.log(lat, lng);
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    };
+
+    getAddress = (lat, lng) => {
+        // Get address from latidude & longitude.
+        Geocode.fromLatLng(lat, lng).then(
+            response => {
+                const address = response.results[0].formatted_address;
+                console.log(address);
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    };
+
     recenterMap() {
         const map = this.map;
         const current = this.state.currentLocation;
@@ -58,6 +93,7 @@ export class CurrentLocation extends React.Component {
         if (map) {
             let center = new maps.LatLng(current.lat, current.lng);
             map.panTo(center);
+            this.getAddress(current.lat, current.lng);
         }
     }
 
@@ -104,7 +140,6 @@ export class CurrentLocation extends React.Component {
     }
 
     render() {
-        console.log(this.state.currentLocation, "Location")
         const style = Object.assign({}, mapStyles.map);
         return (
             <div>

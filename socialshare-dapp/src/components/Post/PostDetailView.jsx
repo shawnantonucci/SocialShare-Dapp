@@ -34,12 +34,10 @@ class PostDetailView extends Component {
 
     render() {
         const { post } = this.state;
-        console.log(post, "from post");
         let tempFile = "";
 
         if (post.file) {
             tempFile = post.file[0];
-            console.log(tempFile.base64, "TEMPFILE");
         }
 
         return (

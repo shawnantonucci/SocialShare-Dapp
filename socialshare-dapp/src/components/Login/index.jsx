@@ -27,8 +27,11 @@ export default class Login extends Component {
                             Keep a record of cool locations. Share and view
                             friends or others locations with safe encrypted data
                         </p>
-                        <p style={{ color: "red", fontWeight: "bold" }}>
+                        <p style={{ color: "green", fontWeight: "bold" }}>
                             More Features Coming Soon!!
+                        </p>
+                        <p style={{ color: "red", fontWeight: "bold" }}>
+                           Make sure to add a username to your account to fully use socialshare.
                         </p>
                         {loading ? (
                             <Loader />

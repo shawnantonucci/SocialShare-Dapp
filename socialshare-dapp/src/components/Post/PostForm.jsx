@@ -7,6 +7,7 @@ import { POST_FILENAME } from "utils/constants";
 import generateUUID from "utils/generateUUID";
 import FileBase64 from "react-file-base64";
 import Map from "../Map";
+import Loader from "../Loader";
 
 class PostForm extends Component {
     constructor(props) {
@@ -23,7 +24,8 @@ class PostForm extends Component {
             file: null,
             files: [],
             location: {},
-            buttonReset: true
+            buttonReset: true,
+            loading: false
         };
     }
 
@@ -100,6 +102,7 @@ class PostForm extends Component {
     };
 
     createPost = async () => {
+        this.setState({ loading: true });
         const options = { encrypt: false };
         const { title, description, posts, file } = this.state;
         const { history, userSession, username } = this.props;
@@ -179,60 +182,64 @@ class PostForm extends Component {
         }
         return (
             <div style={{ width: "75%" }}>
-                <Form onSubmit={this.onSubmit}>
-                    <Form.Field>
-                        <label>Title</label>
-                        <input
-                            name="title"
-                            onChange={this.onChange}
-                            placeholder="Title of the Post "
-                            value={this.state.title}
-                        />
-                    </Form.Field>
-                    <Form.Field
-                        style={{
-                            height: "400px",
-                            position: "relative",
-                            marginBottom: "30px"
-                        }}
-                    >
-                        <label>Google Maps Location</label>
-                        <Map />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Upload an image of the location</label>
-                        {this.state.file && (
-                            <Image
-                                src={this.state.file[0].base64}
-                                style={{
-                                    width: "300px",
-                                    height: "auto",
-                                    margin: "auto"
-                                }}
+                {this.state.loading ? (
+                    <Loader />
+                ) : (
+                    <Form onSubmit={this.onSubmit}>
+                        <Form.Field>
+                            <label>Title</label>
+                            <input
+                                name="title"
+                                onChange={this.onChange}
+                                placeholder="Title of the Post "
+                                value={this.state.title}
                             />
-                        )}
-                        {!this.state.upload && (
-                            <FileBase64
-                                multiple={true}
-                                onDone={this.getFiles}
+                        </Form.Field>
+                        <Form.Field
+                            style={{
+                                height: "400px",
+                                position: "relative",
+                                marginBottom: "30px"
+                            }}
+                        >
+                            <label>Google Maps Location</label>
+                            <Map />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Upload an image of the location</label>
+                            {this.state.file && (
+                                <Image
+                                    src={this.state.file[0].base64}
+                                    style={{
+                                        width: "300px",
+                                        height: "auto",
+                                        margin: "auto"
+                                    }}
+                                />
+                            )}
+                            {!this.state.upload && (
+                                <FileBase64
+                                    multiple={true}
+                                    onDone={this.getFiles}
+                                />
+                            )}
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Description</label>
+                            <Form.TextArea
+                                placeholder="Tell us more about you..."
+                                name="description"
+                                onChange={this.onChange}
+                                placeholder="Create Posts here!"
+                                rows={20}
+                                value={this.state.description}
                             />
-                        )}
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Description</label>
-                        <Form.TextArea
-                            placeholder="Tell us more about you..."
-                            name="description"
-                            onChange={this.onChange}
-                            placeholder="Create Posts here!"
-                            rows={20}
-                            value={this.state.description}
-                        />
-                    </Form.Field>
-                    <Button disabled={this.state.buttonReset} type="submit">
-                        Submit
-                    </Button>
-                </Form>
+                        </Form.Field>
+                        <Button disabled={this.state.buttonReset} type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                )}
             </div>
         );
     }

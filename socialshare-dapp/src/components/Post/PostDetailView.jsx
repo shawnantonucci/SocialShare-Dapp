@@ -45,38 +45,36 @@ class PostDetailView extends Component {
         }
 
         return (
-            <div style={{ marginTop: "30px" }}>
+            <div style={{ marginTop: "30px", marginBottom: "30%" }}>
                 {this.state.loading ? (
                     <Loader />
                 ) : (
-                        <Form className="cardView">
-                            <Form.Field>
-                                <h3>{post.title}</h3>
-                            </Form.Field>
-                            <Form.Field>
-                                <Image
-                                    src={tempFile.base64}
-                                    style={{
-                                        width: "300px",
-                                        height: "auto",
-                                        margin: "auto"
-                                    }}
-                                />
-                                <h3>Address</h3>
-                                <h4 style={{ marginTop: 0 }}>
-                                    {post.location}
-                                </h4>
-                            </Form.Field>
-                            <Form.Field>
-                                <h3>Information about {post.title}</h3>
-                                <p style={{ overflowWrap: "break-word" }}>
-                                    {post.description}
-                                </p>
-                            </Form.Field>
-                            <Form.Field>
-                                <Map />
-                            </Form.Field>
-                        </Form>
+                    <Form className="cardView">
+                        <Form.Field>
+                            <h3>{post.title}</h3>
+                        </Form.Field>
+                        <Form.Field>
+                            <Image
+                                src={tempFile.base64}
+                                style={{
+                                    width: "300px",
+                                    height: "auto",
+                                    margin: "auto"
+                                }}
+                            />
+                            <h3>Address</h3>
+                            <h4 style={{ marginTop: 0 }}>{post.location}</h4>
+                        </Form.Field>
+                        <Form.Field>
+                            <h3>Information about {post.title}</h3>
+                            <p style={{ overflowWrap: "break-word" }}>
+                                {post.description}
+                            </p>
+                        </Form.Field>
+                        <Form.Field>
+                            <Map />
+                        </Form.Field>
+                    </Form>
                 )}
             </div>
         );

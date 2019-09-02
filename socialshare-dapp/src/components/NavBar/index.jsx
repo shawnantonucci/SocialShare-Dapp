@@ -30,6 +30,7 @@ class NavbarComp extends Component {
     };
 
     toggleNavbar = () => {
+        this.handleClick();
         this.setState({ open: !this.state.open });
     };
 
@@ -47,13 +48,42 @@ class NavbarComp extends Component {
         return history.push(`/admin/${user.username}`);
     };
 
+    handleClick = () => {
+        if (!this.state.open) {
+            // attach/remove event handler
+            document.addEventListener("click", this.handleOutsideClick, false);
+        } else {
+            document.removeEventListener(
+                "click",
+                this.handleOutsideClick,
+                false
+            );
+        }
+
+        this.setState(prevState => ({
+            open: !prevState.open
+        }));
+    };
+
+    handleOutsideClick = (e) => {
+        // ignore clicks on the component itself
+        this.handleClick();
+    }
+
     render() {
         const { userSession } = this.props;
         const { open } = this.state;
         const isSignedIn = userSession.isUserSignedIn();
 
         return (
-            <Navbar color="info" fixed="top" active={open}>
+            <Navbar
+                color="info"
+                fixed="top"
+                active={open}
+                ref={node => {
+                    this.node = node;
+                }}
+            >
                 <Navbar.Brand>
                     <Navbar.Item onClick={this.goToAdminProfile}>
                         <p>Social Share</p>

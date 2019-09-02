@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./stylesheets/main.scss";
-import './App.css'
+import "./App.css";
 import { appConfig } from "./utils/constants";
 import { UserSession } from "blockstack";
 import Login from "./components/Login";
@@ -31,7 +31,9 @@ class App extends Component {
 
         return (
             <div className="App">
-                <Navbar userSession={userSession} />
+                {userSession.isUserSignedIn() ? (
+                    <Navbar userSession={userSession} />
+                ) : null}
                 <div className="container">
                     {userSession.isUserSignedIn() ? (
                         <Routes userSession={userSession} />

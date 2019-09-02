@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Button, Card, Content } from "react-bulma-components";
+import { Button, Card, Content, Image } from "react-bulma-components";
 import Loader from "components/Loader";
-import './index.css'
-
+import "./index.css";
+import landingPageImg from "../../assets/adventure.jpg";
 export default class Login extends Component {
     state = {
         loading: false
@@ -18,9 +18,18 @@ export default class Login extends Component {
         const { loading } = this.state;
 
         return (
-            <Card className="card">
-                <Card.Content>
-                    <Content>
+            <div>
+                <Card style={{ marginTop: "100px" }}>
+                    <Card.Content>
+                        <h1>Social Share</h1>
+                        <Image src={landingPageImg} />
+                        <p>
+                            Keep a record of cool locations. Share and view
+                            friends or others locations with safe encrypted data
+                        </p>
+                        <p style={{ color: "red", fontWeight: "bold" }}>
+                            More Features Coming Soon!!
+                        </p>
                         {loading ? (
                             <Loader />
                         ) : (
@@ -31,9 +40,9 @@ export default class Login extends Component {
                                 Sign in with Blockstack
                             </Button>
                         )}
-                    </Content>
-                </Card.Content>
-            </Card>
+                    </Card.Content>
+                </Card>
+            </div>
         );
     }
 }

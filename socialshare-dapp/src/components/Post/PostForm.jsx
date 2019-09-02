@@ -5,8 +5,8 @@ import { withRouter } from "react-router-dom";
 import { Button, Form, Image } from "semantic-ui-react";
 import { POST_FILENAME } from "utils/constants";
 import generateUUID from "utils/generateUUID";
-import ImageUpload from "../ImageUploader";
 import FileBase64 from "react-file-base64";
+import Map from "../Map";
 
 class PostForm extends Component {
     constructor(props) {
@@ -164,7 +164,7 @@ class PostForm extends Component {
         console.log(this.state, "TEST");
 
         return (
-            <div>
+            <div style={{ width: "75%" }}>
                 <Form onSubmit={this.onSubmit}>
                     <Form.Field>
                         <label>Title</label>
@@ -174,6 +174,16 @@ class PostForm extends Component {
                             placeholder="Title of the Post"
                             value={this.state.title}
                         />
+                    </Form.Field>
+                    <Form.Field
+                        style={{
+                            height: "400px",
+                            position: "relative",
+                            marginBottom: "30px",
+                        }}
+                    >
+                        <label>Google Maps Location</label>
+                        <Map />
                     </Form.Field>
                     <Form.Field>
                         <label>Location Image</label>

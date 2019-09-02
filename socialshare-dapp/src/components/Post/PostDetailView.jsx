@@ -4,12 +4,11 @@ import { Button, Form, Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Loader from "../Loader";
 import "./index.scss";
-import Map from "../Map";
+import ViewMap from "../Map/ViewMap";
 class PostDetailView extends Component {
     state = {
         post: {},
-        loading: false,
-        address: ""
+        loading: false
     };
 
     static propTypes = {
@@ -44,6 +43,8 @@ class PostDetailView extends Component {
             tempFile = post.file[0];
         }
 
+        console.log(this.state.post, "POST");
+
         return (
             <div style={{ marginTop: "30px", marginBottom: "30%" }}>
                 {this.state.loading ? (
@@ -72,7 +73,9 @@ class PostDetailView extends Component {
                             </p>
                         </Form.Field>
                         <Form.Field>
-                            <Map />
+                            <ViewMap
+                                post={this.state.post}
+                            />
                         </Form.Field>
                     </Form>
                 )}

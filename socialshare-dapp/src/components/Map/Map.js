@@ -54,16 +54,20 @@ export class CurrentLocation extends React.Component {
             this.loadMap();
         }
         if (prevState.currentLocation !== this.state.currentLocation) {
+            if (this.props.location) {
+                this.getLocationCode(this.props.post.location);
+            }
             this.recenterMap();
         }
     }
 
-    getLocationCode = () => {
+    getLocationCode = address => {
         // Get latidude & longitude from address.
-        Geocode.fromAddress("Eiffel Tower").then(
+        Geocode.fromAddress(address).then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
-                console.log(lat, lng);
+                // console.log(lat, lng, "CODE");
+                this.props.setLocationView(response.results[0]);
             },
             error => {
                 console.error(error);
@@ -76,10 +80,10 @@ export class CurrentLocation extends React.Component {
         Geocode.fromLatLng(lat, lng).then(
             response => {
                 const address = response.results[0].formatted_address;
-                console.log(address);
                 // this.setState({ location: address });
+                // console.log(response.results[0], "SADDASDADFASD")
                 if (this.props.setLocation != null) {
-                    this.props.setLocation(address);
+                    this.props.setLocation(response.results[0]);
                 }
             },
             error => {
@@ -114,6 +118,7 @@ export class CurrentLocation extends React.Component {
             const node = ReactDOM.findDOMNode(mapRef);
 
             let { zoom } = this.props;
+            // const { lat, lng } = this.state.currentLocation;
             const { lat, lng } = this.state.currentLocation;
             const center = new maps.LatLng(lat, lng);
             const mapConfig = Object.assign(
@@ -145,7 +150,6 @@ export class CurrentLocation extends React.Component {
     }
 
     render() {
-        // console.log(this.state.location, "From State")
         const style = Object.assign({}, mapStyles.map);
         return (
             <div>

@@ -26,7 +26,11 @@ class PostForm extends Component {
             location: {},
             buttonReset: true,
             loading: false,
-            tempImg: null
+            tempImg: null,
+            position: {
+                lat: null,
+                lng: null
+            }
         };
     }
 
@@ -42,7 +46,7 @@ class PostForm extends Component {
     }
 
     setLocation = location => {
-        this.setState({ location: location });
+        this.setState({ location: location.formatted_address });
     };
 
     loadPosts = async () => {
@@ -192,7 +196,6 @@ class PostForm extends Component {
             if (this.state.buttonReset === true) {
                 this.validationButton();
             }
-            console.log("works");
         } else if (
             this.props.type == "edit" &&
             this.state.description &&
@@ -203,6 +206,8 @@ class PostForm extends Component {
             }
             console.log("EDIT");
         }
+
+        console.log(this.state.location, "OBJECT")
 
         return (
             <div style={{ width: "70%", marginTop: "30px" }}>
@@ -227,7 +232,10 @@ class PostForm extends Component {
                             }}
                         >
                             <label>Google Maps Location</label>
-                            <Map setLocation={this.setLocation} />
+                            <Map
+                                setLocation={this.setLocation}
+                                location={this.state.location}
+                            />
                         </Form.Field>
                         <Form.Field>
                             <h4

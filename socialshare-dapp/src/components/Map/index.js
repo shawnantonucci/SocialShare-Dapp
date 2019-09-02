@@ -36,9 +36,17 @@ export class MapContainer extends Component {
     };
 
     render() {
+        let temp = {}
+        if (this.props.viewLocation) {
+            temp = Object.values(this.props.viewLocation);
+            // console.log(temp[1], "TEMP")
+        }
         return (
             <CurrentLocation
                 setLocation={this.props.setLocation}
+                setLocationView={this.props.setLocationView}
+                viewLocation={temp}
+                post={this.props.post}
                 centerAroundCurrentLocation
                 google={this.props.google}
             >

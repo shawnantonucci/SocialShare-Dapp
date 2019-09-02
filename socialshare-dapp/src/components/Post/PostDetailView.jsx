@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, Heading, Content } from "react-bulma-components";
-import { Image } from "semantic-ui-react";
+import { Button, Form, Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Loader from "../Loader";
 import "./index.scss";
@@ -46,35 +45,38 @@ class PostDetailView extends Component {
         }
 
         return (
-            <div>
+            <div style={{ marginTop: "30px" }}>
                 {this.state.loading ? (
                     <Loader />
                 ) : (
-                    <Card className="card">
-                        <Card.Content>
-                            <Content>
-                                <Heading renderAs="h3">{post.title}</Heading>
-                            </Content>
-                            <Image
-                                src={tempFile.base64}
-                                style={{
-                                    width: "300px",
-                                    height: "auto",
-                                    margin: "auto"
-                                }}
-                            />
-                            <Content>
+                        <Form className="cardView">
+                            <Form.Field>
+                                <h3>{post.title}</h3>
+                            </Form.Field>
+                            <Form.Field>
+                                <Image
+                                    src={tempFile.base64}
+                                    style={{
+                                        width: "300px",
+                                        height: "auto",
+                                        margin: "auto"
+                                    }}
+                                />
                                 <h3>Address</h3>
                                 <h4 style={{ marginTop: 0 }}>
                                     {post.location}
                                 </h4>
+                            </Form.Field>
+                            <Form.Field>
                                 <h3>Information about {post.title}</h3>
                                 <p style={{ overflowWrap: "break-word" }}>
                                     {post.description}
                                 </p>
-                            </Content>
-                        </Card.Content>
-                    </Card>
+                            </Form.Field>
+                            <Form.Field>
+                                <Map />
+                            </Form.Field>
+                        </Form>
                 )}
             </div>
         );

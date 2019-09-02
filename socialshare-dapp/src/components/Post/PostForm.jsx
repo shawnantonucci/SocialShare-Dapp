@@ -267,10 +267,9 @@ class PostForm extends Component {
                         <Form.Field>
                             <label>Description</label>
                             <Form.TextArea
-                                placeholder="Tell us more about you..."
                                 name="description"
                                 onChange={this.onChange}
-                                placeholder="Create Posts here!"
+                                placeholder="Add more information like events, best time to visit, ect..."
                                 rows={20}
                                 value={this.state.description}
                             />

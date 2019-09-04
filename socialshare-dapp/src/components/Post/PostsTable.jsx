@@ -4,7 +4,7 @@ import _ from "lodash";
 import { Image } from "semantic-ui-react";
 import { Table, Button } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
-
+import Loader from "../Loader";
 class PostsTable extends Component {
     state = {
         loading: false
@@ -82,35 +82,37 @@ class PostsTable extends Component {
         const { posts } = this.props;
 
         return (
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Location</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {_.map(posts, post => {
-                        return (
-                            <tr key={post.id}>
-                                <td>{post.title}</td>
-                                <td>
-                                    <Image
-                                        style={{ height: "40px" }}
-                                        src={`${post.file[0].prefix}${post.file[0].data}`}
-                                    />
-                                </td>
-                                <td style={{ whiteSpace: "nowrap" }}>
-                                    {this.props.type === "admin"
-                                        ? this.displayAdminOptions(post)
-                                        : this.displayPublicOptions(post)}
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </Table>
+            <React.Fragment>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {_.map(posts, post => {
+                            return (
+                                <tr key={post.id}>
+                                    <td>{post.title}</td>
+                                    <td>
+                                        <Image
+                                            style={{ height: "40px" }}
+                                            src={`${post.file[0].prefix}${post.file[0].data}`}
+                                        />
+                                    </td>
+                                    <td style={{ whiteSpace: "nowrap" }}>
+                                        {this.props.type === "admin"
+                                            ? this.displayAdminOptions(post)
+                                            : this.displayPublicOptions(post)}
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            </React.Fragment>
         );
     }
 }

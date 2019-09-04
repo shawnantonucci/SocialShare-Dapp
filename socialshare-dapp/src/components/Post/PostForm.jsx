@@ -31,7 +31,8 @@ class PostForm extends Component {
             position: {
                 lat: null,
                 lng: null
-            }
+            },
+            isEmpty: false
         };
     }
 
@@ -175,9 +176,13 @@ class PostForm extends Component {
     };
 
     getFiles = files => {
-        if (this.state.file > 1) {
-            console.log("TEST");
+        if (files <= 0) {
+            console.log("empty");
+            this.setState({ isEmpty: true });
+        } else {
+            this.setState({ isEmpty: false });
         }
+        console.log(files);
         this.setState({ file: files, upload: true });
     };
 
@@ -208,11 +213,9 @@ class PostForm extends Component {
         ) {
             if (this.state.buttonReset === true) {
                 this.validationButton();
+            } else if (this.state.isEmpty == true) {
+                this.validationButton();
             }
-        }
-        if (this.state.file != null) {
-            const temp = this.state.file[0];
-            console.log(temp);
         }
 
         return (
@@ -220,12 +223,13 @@ class PostForm extends Component {
                 {this.state.loading ? (
                     <Loader />
                 ) : (
-                    <Form onSubmit={this.onSubmit}>
-                        <Form.Field>
-                            <label>Title</label>
+                    <Form error onSubmit={this.onSubmit}>
+                        <Form.Field required>
+                            <label>Location Name</label>
                             <input
                                 name="title"
                                 onChange={this.onChange}
+                                label="Location Name"
                                 placeholder="Title of the Post "
                                 value={this.state.title}
                             />
@@ -243,7 +247,7 @@ class PostForm extends Component {
                                 location={this.state.location}
                             />
                         </Form.Field>
-                        <Form.Field>
+                        <Form.Field required>
                             <h4
                                 style={{
                                     paddingTop: "10px",
@@ -258,9 +262,9 @@ class PostForm extends Component {
                                 onChange={this.onChange}
                             />
                         </Form.Field>
-                        <Form.Field>
+                        <Form.Field required>
                             <label>Upload an image of the location</label>
-                            {/* {this.state.file && (
+                            {this.state.file && (
                                 <Image
                                     src={
                                         this.state.file[0] == undefined
@@ -268,22 +272,17 @@ class PostForm extends Component {
                                             : `${this.state.file[0].prefix}${this.state.file[0].data}`
                                     }
                                     style={{
-                                        width: "300px",
+                                        width: "auto",
                                         height: "auto",
                                         margin: "auto"
                                     }}
                                 />
-                            )} */}
+                            )}
                             <div className="inputFile">
-                                {/* <FileBase64
-                                    multiple={true}
-                                    onDone={this.getFiles}
-                                    style={{ width: "50%" }}
-                                /> */}
                                 <ImageUploader onDone={this.getFiles} />
                             </div>
                         </Form.Field>
-                        <Form.Field>
+                        <Form.Field required>
                             <label>Description</label>
                             <Form.TextArea
                                 name="description"
@@ -293,13 +292,27 @@ class PostForm extends Component {
                                 value={this.state.description}
                             />
                         </Form.Field>
-                        <Button
-                            style={{ marginBottom: "10%" }}
-                            disabled={this.state.buttonReset}
+                        {!this.state.isEmpty ? (
+                            <Button
+                                style={{ marginBottom: "15%", marginTop: "2%" }}
+                                disabled={this.state.buttonReset}
+                                color={
+                                    this.state.buttonReset ? "grey" : "green"
+                                }
+                                type="submit"
+                            >
+                                Submit
+                            </Button>
+                        ) : (
+                            <Button
+                            style={{ marginBottom: "15%", marginTop: "2%" }}
+                            disabled={true}
+                            color="red"
                             type="submit"
                         >
-                            Submit
+                            Required Input missing
                         </Button>
+                        )}
                     </Form>
                 )}
             </div>

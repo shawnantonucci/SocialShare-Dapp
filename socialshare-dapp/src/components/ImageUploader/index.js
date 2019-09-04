@@ -24,7 +24,7 @@ class ImageUpload extends React.Component {
             .then(data => {
                 // returns an array of compressed images
                 // console.log(data[0])
-                // this.setState({ file: data });
+                this.setState({ pictures: data });
                 this.props.onDone(data);
             });
     };

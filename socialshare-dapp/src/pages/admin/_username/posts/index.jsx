@@ -61,10 +61,10 @@ class AdminPosts extends Component {
         const { username } = this.context.state.currentUser;
 
         return (
-            <div>
-                {this.state.loading ? (
-                    <Loader />
-                ) : (
+            // <div>
+            //     {this.state.loading ? (
+            //         <Loader />
+            //     ) : (
                     <Card>
                         <Card.Content>
                             <Content>
@@ -76,8 +76,8 @@ class AdminPosts extends Component {
                             </Content>
                         </Card.Content>
                     </Card>
-                )}
-            </div>
+            //     )}
+            // </div>
         );
     }
 }

@@ -98,7 +98,7 @@ class PostsTable extends Component {
                                 <td>
                                     <Image
                                         style={{ height: "40px" }}
-                                        src={post.file[0].base64}
+                                        src={`${post.file[0].prefix}${post.file[0].data}`}
                                     />
                                 </td>
                                 <td style={{ whiteSpace: "nowrap" }}>

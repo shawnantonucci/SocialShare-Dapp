@@ -8,6 +8,7 @@ import generateUUID from "utils/generateUUID";
 import FileBase64 from "react-file-base64";
 import Map from "../Map";
 import Loader from "../Loader";
+import ImageUploader from "../ImageUploader";
 
 class PostForm extends Component {
     constructor(props) {
@@ -102,15 +103,16 @@ class PostForm extends Component {
                 JSON.stringify(detailParams),
                 options
             );
-            this.setState(
-                {
-                    title: "",
-                    description: "",
-                    file: null,
-                    location: {}
-                },
-                () => history.push(`/admin/${username}/posts`)
-            );
+            // this.setState(
+            //     {
+            //         title: "",
+            //         description: "",
+            //         file: null,
+            //         location: {}
+            //     },
+            //     () => history.push(`/admin/${username}/posts`)
+            // );
+            history.push(`/admin/${username}/posts`);
         } catch (e) {
             console.log(e);
         }
@@ -149,17 +151,18 @@ class PostForm extends Component {
                 JSON.stringify(detailParams),
                 options
             );
-            this.setState(
-                {
-                    title: "",
-                    description: "",
-                    file: null,
-                    image: [],
-                    loading: false,
-                    location: {}
-                },
-                () => history.push(`/admin/${username}/posts`)
-            );
+            // this.setState(
+            //     {
+            //         title: "",
+            //         description: "",
+            //         file: null,
+            //         image: [],
+            //         loading: false,
+            //         location: {}
+            //     },
+            //     () => history.push(`/admin/${username}/posts`)
+            // );
+            history.push(`/admin/${username}/posts`);
         } catch (e) {
             console.log(e);
         }
@@ -172,12 +175,14 @@ class PostForm extends Component {
     };
 
     getFiles = files => {
+        if (this.state.file > 1) {
+            console.log("TEST");
+        }
         this.setState({ file: files, upload: true });
     };
 
     onSubmit = e => {
         e.preventDefault();
-
         const { type } = this.props;
 
         return type === "edit" ? this.editPost() : this.createPost();
@@ -204,6 +209,10 @@ class PostForm extends Component {
             if (this.state.buttonReset === true) {
                 this.validationButton();
             }
+        }
+        if (this.state.file != null) {
+            const temp = this.state.file[0];
+            console.log(temp);
         }
 
         return (
@@ -251,22 +260,27 @@ class PostForm extends Component {
                         </Form.Field>
                         <Form.Field>
                             <label>Upload an image of the location</label>
-                            {this.state.file && (
+                            {/* {this.state.file && (
                                 <Image
-                                    src={this.state.file[0].base64}
+                                    src={
+                                        this.state.file[0] == undefined
+                                            ? null
+                                            : `${this.state.file[0].prefix}${this.state.file[0].data}`
+                                    }
                                     style={{
                                         width: "300px",
                                         height: "auto",
                                         margin: "auto"
                                     }}
                                 />
-                            )}
+                            )} */}
                             <div className="inputFile">
-                                <FileBase64
+                                {/* <FileBase64
                                     multiple={true}
                                     onDone={this.getFiles}
                                     style={{ width: "50%" }}
-                                />
+                                /> */}
+                                <ImageUploader onDone={this.getFiles} />
                             </div>
                         </Form.Field>
                         <Form.Field>

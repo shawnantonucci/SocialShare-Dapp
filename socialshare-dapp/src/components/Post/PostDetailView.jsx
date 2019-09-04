@@ -54,7 +54,7 @@ class PostDetailView extends Component {
                         </Form.Field>
                         <Form.Field>
                             <Image
-                                src={tempFile.base64}
+                                src={`${tempFile.prefix}${tempFile.data}`}
                                 style={{
                                     width: "auto",
                                     height: "400px",

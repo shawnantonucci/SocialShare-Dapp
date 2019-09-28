@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { Switch, Route, Redirect } from "react-router-dom";
-import UserProvider from "components/User/UserProvider";
-import Loader from "components/Loader";
-import AdminUsernameRoute from "pages/admin/_username/routes";
-import UsernamePostsRoute from "pages/_username/routes";
+import UserProvider from "../components/User/UserProvider";
+import Loader from "../components/Loader";
+import AdminUsernameRoute from "../pages/admin/_username/routes";
+import UsernamePostsRoute from "../pages/_username/routes";
 
 class Routes extends Component {
     state = {

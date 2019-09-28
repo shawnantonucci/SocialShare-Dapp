@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import PostForm from "components/Post/PostForm";
-import Loader from "components/Loader";
-import { MyContext } from "components/User/UserProvider";
+import PostForm from "../../../../../../components/Post/PostForm";
+import Loader from "../../../../../../components/Loader";
+import { MyContext } from "../../../../../../components/User/UserProvider";
 
 class AdminPostEdit extends Component {
     state = {

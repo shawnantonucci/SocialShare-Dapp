@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import PropTypes from "prop-types";
-import { MyContext } from "components/User/UserProvider";
-import { POST_FILENAME } from "utils/constants";
+import { MyContext } from "../../components/User/UserProvider";
+import { POST_FILENAME } from "../../utils/constants";
 import { lookupProfile } from "blockstack";
-import Error from "components/Error";
-import PostsTable from "components/Post/PostsTable";
-import PostDetailView from "components/Post/PostDetailView";
+import Error from "../../components/Error";
+import PostsTable from "../../components/Post/PostsTable";
+import PostDetailView from "../../components/Post/PostDetailView";
 
 class UsernamePostsRoute extends Component {
     state = {

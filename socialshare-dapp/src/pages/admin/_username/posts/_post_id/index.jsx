@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { MyContext } from "components/User/UserProvider";
-import PostDetailView from "components/Post/PostDetailView";
+import { MyContext } from "../../../../../components/User/UserProvider";
+import PostDetailView from "../../../../../components/Post/PostDetailView";
 
 class AdminPostView extends Component {
     static propTypes = {

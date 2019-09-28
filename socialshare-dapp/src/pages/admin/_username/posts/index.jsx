@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Card, Content } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
-import { POST_FILENAME } from "utils/constants";
-import { MyContext } from "components/User/UserProvider";
-import PostsTable from "components/Post/PostsTable";
+import { POST_FILENAME } from "../../../../utils/constants";
+import { MyContext } from "../../../../components/User/UserProvider";
+import PostsTable from "../../../../components/Post/PostsTable";
 import Loader from "../../../../components/Loader";
 
 class AdminPosts extends Component {

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Switch, Route, withRouter } from "react-router-dom";
-import AdminUsernamePostsRoutes from "pages/admin/_username/posts/routes";
-import AdminUsername from "pages/admin/_username";
-import { MyContext } from "components/User/UserProvider";
+import AdminUsernamePostsRoutes from "../../../pages/admin/_username/posts/routes";
+import AdminUsername from "../../../pages/admin/_username";
+import { MyContext } from "../../../components/User/UserProvider";
 
 class AdminUsernameRoute extends Component {
     static propTypes = {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Card, Content, Image } from "react-bulma-components";
-import Loader from "components/Loader";
+import Loader from "../Loader";
 import "./index.css";
 import landingPageImg from "../../assets/adventure.jpg";
 export default class Login extends Component {

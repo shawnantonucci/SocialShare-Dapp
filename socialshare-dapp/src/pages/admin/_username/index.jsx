@@ -8,6 +8,7 @@ import {
   Columns
 } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
+import Location from '../../../components/Location'
 import "./index.css";
 
 class AdminUsername extends Component {
@@ -82,11 +83,7 @@ class AdminUsername extends Component {
                   Add a location
                 </Button>
                 <div className="locationContainer">
-                    <div>Location</div>
-                    <div>Location</div>
-                    <div>Location</div>
-                    <div>Location</div>
-                    <div>Location</div>
+                    <Location />
                 </div>
               </div>
           </Card.Content>

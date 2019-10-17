@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { Card } from "react-bulma-components";
+import { Card, Image } from "react-bulma-components";
+import testImage from "../../assets/map.jpg";
 import "./index.css";
 
 const Location = () => {
   const [picture, setPicture] = useState("");
-  const [title, setTitle] = useState("");
-
+  const [title, setTitle] = useState("Test Location");
 
   return (
     <div>
       <Card>
-        <Card.Content>Location</Card.Content>
+        <Card.Content>
+          {title}
+          <Image src={testImage} wrapped ui={false} />
+        </Card.Content>
       </Card>
     </div>
   );

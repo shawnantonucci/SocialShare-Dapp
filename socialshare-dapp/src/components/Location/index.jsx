@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, Image } from "react-bulma-components";
+import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import { POST_FILENAME } from "../../utils/constants";
 import { MyContext } from "../../components/User/UserProvider";
@@ -41,11 +42,20 @@ class Location extends Component {
 
     return (
       <div>
-        <Card>
-          <Card.Content>
-            {title}
-            <Image src={testImage} wrapped ui={false} />
-          </Card.Content>
+        <Card style={{display: "flex", flexDirection: "column"}}>
+          {/* <Card.Content> */}
+            {_.map(this.state.posts, post => {
+              return (
+                <div>
+                  <h3>{post.title}</h3>
+                  <Image
+                    style={{ height: "40px" }}
+                    src={`${post.file[0].prefix}${post.file[0].data}`}
+                  />
+                </div>
+              );
+            })}
+          {/* </Card.Content> */}
         </Card>
       </div>
     );

@@ -5,6 +5,7 @@ import { Image } from "semantic-ui-react";
 import { Table, Button } from "react-bulma-components";
 import { withRouter } from "react-router-dom";
 import Loader from "../Loader";
+
 class PostsTable extends Component {
     state = {
         loading: false

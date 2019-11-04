@@ -60,7 +60,7 @@ class AdminUsername extends Component {
                   <Columns.Column size={6}>
                     <div className="field">
                       <label className="label">
-                        Explore user's posts and locations!
+                        Explore user's saved locations!
                       </label>
                       <input
                         type="text"
